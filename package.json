@@ -1,0 +1,26 @@
+{
+  "name": "techswap",
+  "version": "1.0.0",
+  "description": "TechSwap - Student-to-Student Tech Marketplace",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "init-db": "node init-data.js"
+  },
+  "keywords": ["ecommerce", "marketplace", "tech"],
+  "author": "Donovan McHenry",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "body-parser": "^1.20.2",
+    "express-validator": "^7.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

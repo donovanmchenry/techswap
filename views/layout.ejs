@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle || 'TechSwap' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <span class="logo-icon">🔄</span>
+                    <span class="logo-text">TechSwap</span>
+                </a>
+
+                <div class="nav-search">
+                    <form action="/shop" method="GET">
+                        <input type="text" name="search" placeholder="Search for tech..." class="search-input">
+                        <button type="submit" class="search-btn">🔍</button>
+                    </form>
+                </div>
+
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/shop" class="nav-link">Shop</a>
+                    <a href="/about" class="nav-link">About</a>
+                    <a href="/cart" class="nav-link cart-link">
+                        🛒 Cart
+                        <% if (cartCount > 0) { %>
+                            <span class="cart-badge"><%= cartCount %></span>
+                        <% } %>
+                    </a>
+                    <% if (user) { %>
+                        <a href="/account" class="nav-link">👤 <%= user.name.split(' ')[0] %></a>
+                        <a href="/logout" class="nav-link">Logout</a>
+                    <% } else { %>
+                        <a href="/login" class="btn btn-primary">Login</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <%- body %>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechSwap</h3>
+                    <p>Student-to-student tech marketplace</p>
+                    <p>Making tech affordable for students</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/shop">Shop</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <% if (user) { %>
+                            <li><a href="/account">My Account</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        <% } else { %>
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@techswap.io</p>
+                    <p>IT 310 E-Commerce Project</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechSwap. Created by Donovan McHenry for IT 310.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

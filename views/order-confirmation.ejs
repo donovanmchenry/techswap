@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle || 'TechSwap' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <main>
+        <section class="confirmation-section">
+            <div class="container">
+                <div class="confirmation-container">
+                    <div class="confirmation-icon">✅</div>
+                    <h1>Order Confirmed!</h1>
+                    <p class="confirmation-message">Thank you for your purchase. Your order has been successfully placed.</p>
+
+                    <div class="order-number">
+                        <strong>Order Number:</strong> #<%= order.id %>
+                    </div>
+
+                    <div class="confirmation-details">
+                        <h2>Order Details</h2>
+
+                        <div class="detail-row">
+                            <strong>Email:</strong>
+                            <span><%= order.user_email %></span>
+                        </div>
+
+                        <div class="detail-row">
+                            <strong>Order Date:</strong>
+                            <span><%= new Date(order.created_at).toLocaleDateString() %></span>
+                        </div>
+
+                        <div class="detail-row">
+                            <strong>Shipping Method:</strong>
+                            <span><%= order.shipping_method === 'pickup' ? 'Campus Pickup (Free)' : 'Standard Shipping ($15.00)' %></span>
+                        </div>
+
+                        <div class="detail-row">
+                            <strong>Payment Status:</strong>
+                            <span class="status-badge"><%= order.status %></span>
+                        </div>
+                    </div>
+
+                    <div class="order-items-section">
+                        <h2>Items Ordered</h2>
+                        <% items.forEach(item => { %>
+                            <div class="order-item-row">
+                                <div class="item-details">
+                                    <strong><%= item.title %></strong>
+                                    <span>Quantity: <%= item.quantity %></span>
+                                </div>
+                                <span class="item-price">$<%= (item.price * item.quantity).toFixed(2) %></span>
+                            </div>
+                        <% }); %>
+                    </div>
+
+                    <div class="order-summary-section">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span>$<%= (order.total_amount - order.commission - order.shipping_cost).toFixed(2) %></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>TechSwap Fee (8%):</span>
+                            <span>$<%= order.commission.toFixed(2) %></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span><%= order.shipping_cost > 0 ? '$' + order.shipping_cost.toFixed(2) : 'FREE' %></span>
+                        </div>
+                        <hr>
+                        <div class="summary-row summary-total">
+                            <strong>Total:</strong>
+                            <strong>$<%= order.total_amount.toFixed(2) %></strong>
+                        </div>
+                    </div>
+
+                    <div class="next-steps">
+                        <h3>What's Next?</h3>
+                        <% if (order.shipping_method === 'pickup') { %>
+                            <p>The seller will contact you at <%= order.user_email %> to arrange campus pickup.</p>
+                        <% } else { %>
+                            <p>Your order will be shipped within 1-2 business days. You'll receive tracking information at <%= order.user_email %>.</p>
+                        <% } %>
+                        <p>A confirmation email has been sent to your email address.</p>
+                    </div>
+
+                    <div class="confirmation-actions">
+                        <a href="/shop" class="btn btn-primary btn-lg">Continue Shopping</a>
+                        <% if (typeof user !== 'undefined' && user) { %>
+                            <a href="/account" class="btn btn-outline btn-lg">View My Orders</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <span class="logo-icon">🔄</span>
+                <span class="logo-text">TechSwap</span>
+            </a>
+
+            <div class="nav-search">
+                <form action="/shop" method="GET">
+                    <input type="text" name="search" placeholder="Search for tech..." class="search-input">
+                    <button type="submit" class="search-btn">🔍</button>
+                </form>
+            </div>
+
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/shop" class="nav-link">Shop</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="/cart" class="nav-link cart-link">
+                    🛒 Cart
+                    <% if (typeof cartCount !== 'undefined' && cartCount > 0) { %>
+                        <span class="cart-badge"><%= cartCount %></span>
+                    <% } %>
+                </a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/account" class="nav-link">👤 <%= user.name.split(' ')[0] %></a>
+                    <a href="/logout" class="nav-link">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="btn btn-primary">Login</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

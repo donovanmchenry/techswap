@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle || 'TechSwap' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <main>
+        <section class="about-hero">
+            <div class="container">
+                <h1>About TechSwap</h1>
+                <p class="lead">Making tech affordable and accessible for students</p>
+            </div>
+        </section>
+
+        <section class="about-content">
+            <div class="container">
+                <div class="about-section">
+                    <h2>Our Mission</h2>
+                    <p>TechSwap is a student-to-student marketplace designed to make technology more accessible and affordable for college students. We believe that every student deserves access to quality tech without breaking the bank.</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>How We Work</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎓</div>
+                            <h3>Student Verified</h3>
+                            <p>All sellers are verified students with .edu email addresses, ensuring a trusted community marketplace.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Secure Payments</h3>
+                            <p>We use Stripe for secure payment processing. Your financial information is always protected.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📍</div>
+                            <h3>Campus Pickup</h3>
+                            <p>Meet on campus for free pickup, or choose shipping for added convenience.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💰</div>
+                            <h3>Fair Pricing</h3>
+                            <p>We charge only 8% commission to keep prices low for buyers and maximize earnings for sellers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>What You Can Buy & Sell</h2>
+                    <div class="categories-showcase">
+                        <div class="category-showcase">
+                            <span class="category-icon">💻</span>
+                            <h3>Laptops</h3>
+                            <p>MacBooks, Windows laptops, Chromebooks</p>
+                        </div>
+                        <div class="category-showcase">
+                            <span class="category-icon">📱</span>
+                            <h3>Phones</h3>
+                            <p>iPhones, Android devices, accessories</p>
+                        </div>
+                        <div class="category-showcase">
+                            <span class="category-icon">📟</span>
+                            <h3>Tablets</h3>
+                            <p>iPads, Galaxy Tabs, e-readers</p>
+                        </div>
+                        <div class="category-showcase">
+                            <span class="category-icon">🎧</span>
+                            <h3>Audio</h3>
+                            <p>Headphones, earbuds, speakers</p>
+                        </div>
+                        <div class="category-showcase">
+                            <span class="category-icon">🎮</span>
+                            <h3>Gaming</h3>
+                            <p>Consoles, controllers, accessories</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>Our Story</h2>
+                    <p>TechSwap was created as part of an IT 310 E-Commerce course project at the University of Example. Our goal was to address a real need in the student community: affordable access to technology.</p>
+                    <p>We noticed that many students upgrade their devices regularly, leaving perfectly good tech sitting unused. At the same time, other students struggle to afford the technology they need for their studies. TechSwap bridges this gap.</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Safety & Security</h2>
+                    <p>Your safety is our priority:</p>
+                    <ul class="safety-list">
+                        <li>✅ All transactions are processed through secure Stripe payment system</li>
+                        <li>✅ Sellers are verified students with .edu email addresses</li>
+                        <li>✅ End-to-end SSL encryption protects your data</li>
+                        <li>✅ We never store your credit card information</li>
+                        <li>✅ Campus pickup locations are public and safe</li>
+                        <li>✅ Review system helps you choose trusted sellers</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h2>Condition Grading System</h2>
+                    <div class="condition-guide">
+                        <div class="condition-item">
+                            <span class="condition-grade grade-a">A</span>
+                            <div>
+                                <strong>Excellent</strong>
+                                <p>Like new, minimal to no signs of wear</p>
+                            </div>
+                        </div>
+                        <div class="condition-item">
+                            <span class="condition-grade grade-b">B</span>
+                            <div>
+                                <strong>Good</strong>
+                                <p>Minor cosmetic wear, fully functional</p>
+                            </div>
+                        </div>
+                        <div class="condition-item">
+                            <span class="condition-grade grade-c">C</span>
+                            <div>
+                                <strong>Fair</strong>
+                                <p>Visible wear, but works perfectly</p>
+                            </div>
+                        </div>
+                        <div class="condition-item">
+                            <span class="condition-grade grade-d">D</span>
+                            <div>
+                                <strong>Poor</strong>
+                                <p>Significant wear, may have minor issues</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section cta-section-about">
+                    <h2>Ready to Get Started?</h2>
+                    <p>Join the TechSwap community today</p>
+                    <div class="cta-buttons">
+                        <a href="/shop" class="btn btn-primary btn-lg">Browse Products</a>
+                        <% if (typeof user === 'undefined' || !user) { %>
+                            <a href="/register" class="btn btn-outline btn-lg">Create Account</a>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>Contact Us</h2>
+                    <p>Have questions or feedback? We'd love to hear from you!</p>
+                    <p>Email: <a href="mailto:support@techswap.io">support@techswap.io</a></p>
+                    <p>This project was created by Donovan McHenry for IT 310 E-Commerce, January 2026.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

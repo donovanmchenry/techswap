@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle || 'TechSwap' %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <main>
+        <section class="shop-header">
+            <div class="container">
+                <h1>Shop All Products</h1>
+                <p>Find the best tech deals from students</p>
+            </div>
+        </section>
+
+        <section class="shop-content">
+            <div class="container">
+                <div class="shop-layout">
+                    <aside class="shop-sidebar">
+                        <div class="filter-section">
+                            <h3>Categories</h3>
+                            <ul class="filter-list">
+                                <li><a href="/shop" class="<%= !selectedCategory ? 'active' : '' %>">All Products</a></li>
+                                <% categories.forEach(category => { %>
+                                    <li><a href="/shop?category=<%= category %>" class="<%= selectedCategory === category ? 'active' : '' %>"><%= category %></a></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Condition</h3>
+                            <ul class="filter-list">
+                                <li><a href="/shop<%= selectedCategory ? '?category=' + selectedCategory : '' %>" class="<%= !selectedCondition ? 'active' : '' %>">All Conditions</a></li>
+                                <li><a href="/shop?<%= selectedCategory ? 'category=' + selectedCategory + '&' : '' %>condition=A" class="<%= selectedCondition === 'A' ? 'active' : '' %>">A - Excellent</a></li>
+                                <li><a href="/shop?<%= selectedCategory ? 'category=' + selectedCategory + '&' : '' %>condition=B" class="<%= selectedCondition === 'B' ? 'active' : '' %>">B - Good</a></li>
+                                <li><a href="/shop?<%= selectedCategory ? 'category=' + selectedCategory + '&' : '' %>condition=C" class="<%= selectedCondition === 'C' ? 'active' : '' %>">C - Fair</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <div class="shop-main">
+                        <div class="shop-toolbar">
+                            <p class="results-count"><%= products.length %> products found</p>
+                            <div class="sort-options">
+                                <label for="sort">Sort by:</label>
+                                <select id="sort" onchange="window.location.href='/shop?<%= selectedCategory ? 'category=' + selectedCategory + '&' : '' %><%= selectedCondition ? 'condition=' + selectedCondition + '&' : '' %>sort=' + this.value">
+                                    <option value="newest" <%= selectedSort === 'newest' ? 'selected' : '' %>>Newest First</option>
+                                    <option value="price-low" <%= selectedSort === 'price-low' ? 'selected' : '' %>>Price: Low to High</option>
+                                    <option value="price-high" <%= selectedSort === 'price-high' ? 'selected' : '' %>>Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <% if (products.length === 0) { %>
+                            <div class="no-results">
+                                <h2>No products found</h2>
+                                <p>Try adjusting your filters or search terms</p>
+                                <a href="/shop" class="btn btn-primary">View All Products</a>
+                            </div>
+                        <% } else { %>
+                            <div class="product-grid">
+                                <% products.forEach(product => { %>
+                                    <div class="product-card">
+                                        <a href="/product/<%= product.id %>">
+                                            <div class="product-image">
+                                                <img src="<%= product.image_url %>" alt="<%= product.title %>" onerror="this.src='/images/placeholder.jpg'">
+                                                <span class="product-condition condition-<%= product.condition %>"><%= product.condition %></span>
+                                            </div>
+                                            <div class="product-info">
+                                                <h3 class="product-title"><%= product.title %></h3>
+                                                <p class="product-campus">📍 <%= product.campus %></p>
+                                                <div class="product-footer">
+                                                    <span class="product-price">$<%= product.price.toFixed(2) %></span>
+                                                    <button class="btn btn-sm btn-primary" onclick="addToCart(<%= product.id %>, event)">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
